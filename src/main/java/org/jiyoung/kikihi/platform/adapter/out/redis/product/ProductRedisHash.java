@@ -2,10 +2,6 @@ package org.jiyoung.kikihi.platform.adapter.out.redis.product;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.jiyoung.kikihi.platform.adapter.out.jpa.keyboard.product.ProductSnippetJpaEntity;
-import org.jiyoung.kikihi.platform.adapter.out.jpa.keyboard.product.ProductStatisticsJpaEntity;
-import org.jiyoung.kikihi.platform.domain.keyboard.product.Product;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.redis.core.RedisHash;
 
 @Getter
