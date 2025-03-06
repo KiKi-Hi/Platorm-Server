@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class UserService {
-    private final UserJpaRepository UserRepository;
+    private final UserJpaRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     // 가입하고 도대체 뭘 반환해야하는 거임..???
@@ -19,12 +19,12 @@ public class UserService {
         String name=dto.getName();
 
         System.out.println(email+","+password+","+name);
-        boolean isExist = UserRepository.findByEmail(email).isPresent();
+        boolean isExist = userRepository.findByEmail(email).isPresent();
 
         if (isExist) {
             throw new IllegalArgumentException("이미 존재하는 이메일입니다.");
         }
-        org.jiyoung.kikihi.domain.user.domain.UserJpaEntity userJpaEntity = UserRepository.save(org.jiyoung.kikihi.domain.user.domain.UserJpaEntity.from(email, bCryptPasswordEncoder.encode(password), name));
+        org.jiyoung.kikihi.domain.user.domain.UserJpaEntity userJpaEntity = userRepository.save(org.jiyoung.kikihi.domain.user.domain.UserJpaEntity.from(email, bCryptPasswordEncoder.encode(password), name));
         System.out.println(userJpaEntity.getEmail()+":"+ userJpaEntity.getPassword()+":"+ userJpaEntity.getRole());
     }
 

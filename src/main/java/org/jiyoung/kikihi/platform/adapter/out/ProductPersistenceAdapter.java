@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jiyoung.kikihi.platform.adapter.out.jpa.keyboard.product.ProductJpaEntity;
 import org.jiyoung.kikihi.platform.adapter.out.jpa.keyboard.product.ProductJpaRepository;
+import org.jiyoung.kikihi.platform.adapter.out.redis.product.ProductRedisRepository;
 import org.jiyoung.kikihi.platform.application.out.keyboard.product.SaveProductPort;
 import org.jiyoung.kikihi.platform.application.out.keyboard.product.DeleteProductPort;
 import org.jiyoung.kikihi.platform.application.out.keyboard.product.LoadProductPort;
@@ -28,11 +29,17 @@ public class ProductPersistenceAdapter implements LoadProductPort, SaveProductPo
      */
 
     private final ProductJpaRepository repository;
+    private final ProductRedisRepository redisRepository;
 
     @Override
     public Product createProduct(Product product) {
         return repository.save(ProductJpaEntity.from(product))
                 .toDomain();
+    }
+
+    @Override
+    public void minusProduct(Long productId) {
+
     }
 
     @Override
@@ -64,6 +71,13 @@ public class ProductPersistenceAdapter implements LoadProductPort, SaveProductPo
     public void deleteProduct(Long productId) {
         repository.deleteById(productId);
     }
+
+    // 상품 결제 재고 -1
+//    @Override
+//    public void decreaseProduct(Long productId) {
+//        redisRepository.
+//
+//    }
 
     // 동적 쿼리 생성 (필터링 조건을 Specification으로 처리)
     private Specification<ProductJpaEntity> of(String productTitle, Double minPrice, Double maxPrice) {

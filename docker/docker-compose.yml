@@ -17,6 +17,12 @@ services:
       - mysql-data:/var/lib/mysql
     networks:
       - kikihi-net
+  redis:
+    image: redis:7.2.5
+    container_name: redis-kikihi
+    ports:
+      - '6379:6379'
+    
 
 volumes:
   mysql-data:

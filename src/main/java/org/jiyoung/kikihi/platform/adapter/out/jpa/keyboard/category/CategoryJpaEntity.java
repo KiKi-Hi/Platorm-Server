@@ -11,10 +11,10 @@ import org.jiyoung.kikihi.platform.domain.keyboard.category.Category;
 @Table(name = "categories")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CategoryJpaEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "category_id") // 실제 DB 컬럼 이름이 category_id라면...
+    private Long categoryId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id") // 부모가 없는 최상위 카테고리 가능
@@ -31,7 +31,7 @@ public class CategoryJpaEntity {
     // from
     public static CategoryJpaEntity from(Category category) {
         return CategoryJpaEntity.builder()
-                .id(category.getId())
+                .categoryId(category.getId())
                 .name(category.getName())
                 .parent(category.getParent() != null ? CategoryJpaEntity.from(category.getParent()) : null)
                 .code(category.getCode())
@@ -42,7 +42,7 @@ public class CategoryJpaEntity {
     // toDomain (CategoryJpaEntity -> Category 변환)
     public Category toDomain() {
         return Category.builder()
-                .id(id)
+                .id(categoryId)
                 .name(name)
                 .parent(parent != null ? parent.toDomain() : null)
                 .code(code)

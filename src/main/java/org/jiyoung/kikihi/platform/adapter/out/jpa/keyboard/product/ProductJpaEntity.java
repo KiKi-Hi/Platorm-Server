@@ -14,7 +14,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-//@Document(indexName = "product") // Elasticsearch에서 사용할 인덱스
 public class ProductJpaEntity extends BaseEntity {
 
     // JPA용 ID 필드 (기본키)

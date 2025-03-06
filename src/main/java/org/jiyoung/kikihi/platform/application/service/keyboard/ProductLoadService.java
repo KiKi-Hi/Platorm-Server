@@ -23,7 +23,8 @@ public class ProductLoadService implements GetProductUseCase, ReactionProductUse
 
     @Override
     public Optional<Product> getProductById(Long productId) {
-        return loadPort.loadProductById(productId);
+        return loadPort.loadProductById(productId);// interface의 함수를 실행시키니까 -> port건들일일이 없음
+        //-> 구현체만 바꿔끼운다. port - adapter 구조!@
     }
 
     @Override
