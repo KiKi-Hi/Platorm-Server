@@ -12,8 +12,4 @@ public interface CreateProductUseCase {
     // 상품 저장하기
     Product create(ProductRequest request);
 
-    // 임시저장된 상품 jpa에 저장하기
-    Product createProductByTemp(Long userId, Long index);
-
-
 }

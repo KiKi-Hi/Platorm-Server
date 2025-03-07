@@ -1,14 +1,10 @@
 package org.jiyoung.kikihi.platform.application.out.keyboard.product;
 
-import org.jiyoung.kikihi.platform.adapter.out.redis.product.ProductRedisHash;
 import org.jiyoung.kikihi.platform.domain.keyboard.product.Product;
 
 import java.util.Optional;
 
 public interface SaveProductPort {
-
-    // 임시저장으로 상품 저장하기
-    void saveTemporaryProduct(ProductRedisHash product);
 
     // 상품 등록하기
     Product createProduct(Product product);

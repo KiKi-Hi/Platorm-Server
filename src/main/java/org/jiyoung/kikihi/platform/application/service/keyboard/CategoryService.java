@@ -19,6 +19,8 @@ public class CategoryService implements CreateCategoryUseCase, GetCategoryUseCas
 
     private final CategoryPort categoryPort;
 
+    /// Create
+
     @Override
     public Category createCategory(CategoryRequest request) {
         Category parent = null;
@@ -32,6 +34,7 @@ public class CategoryService implements CreateCategoryUseCase, GetCategoryUseCas
         return categoryPort.createCategory(category);
     }
 
+    /// Get
 
     @Override
     public Optional<Category> findCategoryByCode(String code) {
