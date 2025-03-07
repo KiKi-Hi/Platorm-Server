@@ -1,6 +1,7 @@
 package org.jiyoung.kikihi.platform.application.out.keyboard.product;
 
 import org.jiyoung.kikihi.platform.adapter.out.redis.product.ProductRedisHash;
+import org.jiyoung.kikihi.platform.domain.keyboard.product.Product;
 import org.jiyoung.kikihi.platform.domain.keyboard.product.ProductOption;
 
 import java.util.List;
@@ -18,7 +19,10 @@ public interface TempProductPort {
 
     /// 조회
     // 사용자별 상품 임시저장 조회
-    List<ProductRedisHash> getTemporaryProductByUserId(Long userId);
+    List<Product> getTemporaryProductByUserId(Long userId);
+
+    // 아이디를 바탕으로 옵션 조회
+    List<ProductOption> getTemporalOptionsByProductId(Long productId);
 
 
     /// 삭제

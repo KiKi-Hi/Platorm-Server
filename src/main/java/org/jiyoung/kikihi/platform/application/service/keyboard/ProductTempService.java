@@ -21,7 +21,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ProductTempService implements TemporaryProductUseCase {
 
-
     private final TempProductPort tempPort;
 
     // 의존성
@@ -52,15 +51,30 @@ public class ProductTempService implements TemporaryProductUseCase {
     /// userId를 바탕으로 상품 가져오기
     @Override
     public List<Product> getTemporaryProductsByUserId(Long userId) {
-        return tempPort.getTemporaryProductByUserId(userId)
-                .stream().map(ProductRedisHash::toDomain).toList();
+        List<Product> list = tempPort.getTemporaryProductByUserId(userId);
+
+        list.forEach(product -> {
+            List<ProductOption> options = tempPort.getTemporalOptionsByProductId(product.getId());
+            product.changeOptions(options);
+        });
+
+        return list;
     }
 
     @Override
-    public Optional<Product> getTemporaryProductByUserId(Long userId) {
-        return Optional.empty();
+    public Optional<Product> getTemporaryProductByIndexAndUserId(Long userId, int index) {
+
+        // 상품 정보 가져오기
+        List<Product> list = tempPort.getTemporaryProductByUserId(userId);
+        Product product = list.get(index - 1);
+
+        // 옵션과 가져오기
+        List<ProductOption> options = tempPort.getTemporalOptionsByProductId(product.getId());
+
+        // 옵션 연결하기
+        product.changeOptions(options);
+
+        return Optional.of(product);
     }
-
-
 
 }

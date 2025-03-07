@@ -1,5 +1,6 @@
 package org.jiyoung.kikihi.platform.application.service.keyboard;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.jiyoung.kikihi.platform.adapter.in.web.dto.request.product.ProductRequest;
 import org.jiyoung.kikihi.platform.application.in.keyboard.product.CreateProductUseCase;
@@ -57,11 +58,19 @@ public class ProductService implements CreateProductUseCase, GetProductUseCase {
     }
 
     /// Load 관련
-    // 상품 상세 조회
     @Override
     public Optional<Product> getProductById(Long productId) {
-        return loadPort.loadProductById(productId);// interface의 함수를 실행시키니까 -> port건들일일이 없음
-        //-> 구현체만 바꿔끼운다. port - adapter 구조!@
+        Product product = loadPort.loadProductById(productId)
+                .orElseThrow(() -> new EntityNotFoundException("해당 ID의 상품을 찾을 수 없습니다."));
+
+        // 상품 옵션 조회
+        List<ProductOption> options = optionPort.loadOptionByProductId(productId);
+
+        // 상품에 옵션 적용
+        product.changeOptions(options);
+
+        // 상품 반환
+        return Optional.of(product);
     }
 
     // 상품 목록 조회 (최신순)

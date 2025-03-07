@@ -20,18 +20,11 @@ public class ProductDetailResponse {
     private List<ProductTagResponse> tag;
 
     /// 함수
-    public static ProductDetailResponse from(Product product, List<ProductOption> options) {
-
-        return ProductDetailResponse.builder()
-                .basic(ProductBasicResponse.from(product))
-                .option(ProductOptionResponse.from(options))
-                .build();
-    }
-
     public static ProductDetailResponse from(Product product) {
 
         return ProductDetailResponse.builder()
                 .basic(ProductBasicResponse.from(product))
+                .option(ProductOptionResponse.from(product.getOptions()))
                 .build();
     }
 

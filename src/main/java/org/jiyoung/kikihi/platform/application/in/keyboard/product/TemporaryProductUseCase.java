@@ -18,5 +18,5 @@ public interface TemporaryProductUseCase {
     List<Product> getTemporaryProductsByUserId(Long userId);
 
     // 특정 임시저장 상품 가져오기
-    Optional<Product> getTemporaryProductByUserId(Long userId);
+    Optional<Product> getTemporaryProductByIndexAndUserId(Long userId, int index);
 }

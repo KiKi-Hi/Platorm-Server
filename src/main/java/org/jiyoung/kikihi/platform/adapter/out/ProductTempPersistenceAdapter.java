@@ -7,6 +7,7 @@ import org.jiyoung.kikihi.platform.adapter.out.redis.product.ProductOptionRedisR
 import org.jiyoung.kikihi.platform.adapter.out.redis.product.ProductRedisHash;
 import org.jiyoung.kikihi.platform.adapter.out.redis.product.ProductRedisRepository;
 import org.jiyoung.kikihi.platform.application.out.keyboard.product.TempProductPort;
+import org.jiyoung.kikihi.platform.domain.keyboard.product.Product;
 import org.jiyoung.kikihi.platform.domain.keyboard.product.ProductOption;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +26,7 @@ public class ProductTempPersistenceAdapter implements TempProductPort {
     private final ProductOptionRedisRepository optionRedisRepository;
 
     /// 저장 기능
+
     // Redis에 상품 임시 저장하기
     @Override
     public void saveTemporaryProduct(ProductRedisHash product) {
@@ -46,8 +48,15 @@ public class ProductTempPersistenceAdapter implements TempProductPort {
 
     // Redis에서 특정 사용자의 임시 저장된 상품을 조회하는 메서드
     @Override
-    public List<ProductRedisHash> getTemporaryProductByUserId(Long userId) {
-        return redisRepository.findAllByUserId(userId);
+    public List<Product> getTemporaryProductByUserId(Long userId) {
+        return redisRepository.findAllByUserId(userId)
+                .stream().map(ProductRedisHash::toDomain).toList();
+    }
+
+    @Override
+    public List<ProductOption> getTemporalOptionsByProductId(Long productId) {
+        return optionRedisRepository.findByProductId(productId)
+                .stream().map(ProductOptionRedisHash::toDomain).toList();
     }
 
 

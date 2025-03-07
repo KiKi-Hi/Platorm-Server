@@ -4,6 +4,8 @@ import lombok.*;
 import org.jiyoung.kikihi.platform.adapter.in.web.dto.request.product.ProductRequest;
 import org.jiyoung.kikihi.platform.domain.BaseDomain;
 
+import java.util.*;
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -18,6 +20,7 @@ public class Product extends BaseDomain {
 
     // 누가 등록했는지 알아야함.
     private Long userId;
+
 
     /// 연관 관계 관련 내용
     /// 연관 관계 내용은 여러개가 가능하니 @OneToMany의 형식과 같다.
@@ -38,5 +41,16 @@ public class Product extends BaseDomain {
                 .userId(request.getUserId())
                 .build();
     }
+
+    // ! ---
+
+    // 출력을 위한 저장
+    // !! 생성에서 사용하지 않음 !!
+    private List<ProductOption> options;
+
+    public void changeOptions(List<ProductOption> options) {
+        this.options = options;
+    }
+
 
 }

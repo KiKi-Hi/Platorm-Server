@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import org.jiyoung.kikihi.platform.domain.keyboard.product.ProductOption;
 import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.index.Indexed;
 
 @Getter
 @Builder
@@ -13,7 +14,9 @@ public class ProductOptionRedisHash {
 
     private Long id;
 
+    @Indexed
     private Long productId;
+
     private String color;
     private String switchType;
     private String layout;

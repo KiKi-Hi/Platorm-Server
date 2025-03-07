@@ -11,11 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductReactionService implements ReactionProductUseCase {
 
 
+    // 좋아요 추가
     @Override
     public void addLike(Long productId, Long userId) {
 
     }
 
+
+    // 싫어요 추가
     @Override
     public void RemoveLike(Long productId, Long userId) {
 
