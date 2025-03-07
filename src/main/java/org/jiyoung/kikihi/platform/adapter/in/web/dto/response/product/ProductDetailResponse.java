@@ -19,6 +19,7 @@ public class ProductDetailResponse {
 
     private List<ProductTagResponse> tag;
 
+    /// 함수
     public static ProductDetailResponse from(Product product, List<ProductOption> options) {
 
         return ProductDetailResponse.builder()
@@ -32,6 +33,13 @@ public class ProductDetailResponse {
         return ProductDetailResponse.builder()
                 .basic(ProductBasicResponse.from(product))
                 .build();
+    }
+
+    public static List<ProductDetailResponse> from(List<Product> product) {
+
+        return product.stream()
+                .map(ProductDetailResponse::from)
+                .toList();
     }
 
     

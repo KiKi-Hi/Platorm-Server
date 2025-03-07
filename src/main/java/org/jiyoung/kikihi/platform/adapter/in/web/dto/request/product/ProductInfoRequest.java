@@ -8,7 +8,7 @@ public class ProductInfoRequest {
     private String productName;
     private String description;
     private String categoryCode;
-    private int productPrice = 0;
+    private int productPrice ;
     private String productTitle;
     private String brand;
     private String manufacturer;

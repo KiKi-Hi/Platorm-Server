@@ -29,7 +29,7 @@ public class ProductListResponse {
         ProductInfo info = entity.getInfo();
 
         return ProductListResponse.builder()
-                .categoryName(info.getProductName())
+                .categoryName(info.getCategoryCode())
                 .productName(info.getProductName())
                 .productTitle(info.getProductTitle())
                 .productPrice(info.getProductPrice())
