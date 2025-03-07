@@ -1,4 +1,4 @@
-package org.jiyoung.kikihi.platform.application.in.product;
+package org.jiyoung.kikihi.platform.application.in.keyboard.product;
 
 public interface ManageProductPriceUseCase {
 

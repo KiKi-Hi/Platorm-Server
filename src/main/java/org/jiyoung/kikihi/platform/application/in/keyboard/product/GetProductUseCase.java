@@ -1,4 +1,4 @@
-package org.jiyoung.kikihi.platform.application.in.product;
+package org.jiyoung.kikihi.platform.application.in.keyboard.product;
 
 import org.jiyoung.kikihi.platform.domain.keyboard.product.Product;
 import org.springframework.data.domain.Page;

@@ -9,6 +9,8 @@ import java.util.Optional;
 
 public interface LoadProductPort {
 
+    /// DB
+
     // 상품 정보 가져오기
     Optional<Product> loadProductById(Long productId);
 
@@ -18,10 +20,12 @@ public interface LoadProductPort {
     // 좋아요수 조회
     Page<Product> loadProductsByLike(Pageable pageable);
 
-    // 조건에 따른 조히
+    // 조건에 따른 조회
     Page<Product> loadProductsByCondition(Pageable pageable, String productTitle, Double minPrice, Double maxPrice);
 
-    // 임시저장된 product 가져요기
-    Optional<ProductRedisHash> getTemporaryProduct(String userId);
+
+    ///  캐싱
+    // 사용자별 임시저장 조회
+    Optional<ProductRedisHash> getTemporaryProductByUserId(Long userId);
 
 }

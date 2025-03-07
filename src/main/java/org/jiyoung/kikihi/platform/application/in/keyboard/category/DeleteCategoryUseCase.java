@@ -1,4 +1,4 @@
-package org.jiyoung.kikihi.platform.application.in.category;
+package org.jiyoung.kikihi.platform.application.in.keyboard.category;
 
 public interface DeleteCategoryUseCase {
 
