@@ -23,8 +23,8 @@ public class CategoryService implements CreateCategoryUseCase, GetCategoryUseCas
     public Category createCategory(CategoryRequest request) {
         Category parent = null;
 
-        if (!categoryPort.existsCategory(request.getCode())) {
-            throw new EntityNotFoundException("존재하지 않습니다.");
+        if (categoryPort.existsCategory(request.getCode())) {
+            throw new IllegalStateException("해당코드가 이미 존재합니다.");
         }
 
         Category category = Category.of(request.getParentId(), request.getName(), request.getCode(), request.getDescription());
