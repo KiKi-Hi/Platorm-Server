@@ -1,4 +1,4 @@
-package org.jiyoung.kikihi.platform.adapter.in.web.product;
+package org.jiyoung.kikihi.platform.adapter.in.web.dto.request.product;
 
 import lombok.Data;
 
@@ -7,6 +7,6 @@ public class TempProductSaveRequest {
 
     private Long userId;
 
-    private Long index;
+    private int index;
 
 }

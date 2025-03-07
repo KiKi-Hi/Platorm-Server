@@ -15,7 +15,7 @@ public class ProductInfoJpaEntity {
     private String productName;
     private String description;
     private String categoryCode;
-    private int productPrice = 0;
+    private int productPrice;
     private String productTitle;
     private String brand;
     private String manufacturer;
@@ -26,7 +26,14 @@ public class ProductInfoJpaEntity {
                 .productTitle(domain.getProductTitle())
                 .brand(domain.getBrand())
                 .manufacturer(domain.getManufacturer())
+                .description(domain.getDescription())
+                .productPrice(domain.getProductPrice())
+                .productTitle(domain.getProductTitle())
+                .productName(domain.getProductName())
+                .categoryCode(domain.getCategoryCode())
+                .productPrice(domain.getProductPrice())
                 .build();
+
     }
 
     public ProductInfo toDomain() {
@@ -34,6 +41,10 @@ public class ProductInfoJpaEntity {
                 .productTitle(productTitle)
                 .brand(brand)
                 .manufacturer(manufacturer)
+                .description(description)
+                .productPrice(productPrice)
+                .productName(productName)
+                .categoryCode(categoryCode)
                 .build();
     }
 

@@ -32,4 +32,21 @@ public class ProductOptionRedisHash {
                 .extraPrice(productOption.getExtraPrice())
                 .build();
     }
+    // toDomain
+    public ProductOption toDomain() {
+        return ProductOption.builder()
+                .id(id)
+                .productId(productId)
+                .color(color)
+                .switchType(switchType)
+                .layout(layout)
+                .isWireless(isWireless)
+                .extraPrice(extraPrice)
+                .build();
+    }
+
+    // 비즈니스 도메인
+    public void changeProductId(Long productId) {
+        this.productId = productId;
+    }
 }

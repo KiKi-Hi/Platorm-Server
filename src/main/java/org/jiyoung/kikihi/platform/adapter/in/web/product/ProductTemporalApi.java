@@ -9,6 +9,8 @@ import org.jiyoung.kikihi.platform.application.in.keyboard.product.TemporaryProd
 import org.jiyoung.kikihi.platform.domain.keyboard.product.Product;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @Slf4j
 @RestController
@@ -35,10 +37,10 @@ public class ProductTemporalApi {
 
     // 사용자별 임시 목록 조회
     @GetMapping("/temporary/{userId}")
-    public ApiResponse<ProductDetailResponse> getTemporaryProduct(@PathVariable("userId") Long userId) {
-        Product domain = temporaryService.getTemporaryProduct(userId).toDomain();
+    public ApiResponse<List<ProductDetailResponse>> getTemporaryProduct(@PathVariable("userId") Long userId) {
+        List<Product> products = temporaryService.getTemporaryProductsByUserId(userId);
 
-        return ApiResponse.created(ProductDetailResponse.from(domain));
+        return ApiResponse.created(ProductDetailResponse.from(products));
     }
 }
 

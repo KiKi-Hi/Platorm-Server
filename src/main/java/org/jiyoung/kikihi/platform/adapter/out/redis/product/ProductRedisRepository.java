@@ -6,6 +6,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.*;
 import java.util.Optional;
 
 @Repository
@@ -51,6 +52,6 @@ public interface ProductRedisRepository extends CrudRepository<ProductRedisHash,
     }
 
     /// 유저 ID를 바탕으로 임시저장 목록 가져오기
-    Optional<ProductRedisHash> findByUserId(Long userId);
+    List<ProductRedisHash> findAllByUserId(Long userId);
 
 }

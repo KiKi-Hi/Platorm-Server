@@ -52,5 +52,10 @@ public class ProductOption {
                 .map(ProductOption::of).toList();
     }
 
+    /// 비즈니스 로직
+    public void changeProductId(Long productId) {
+        this.productId = productId;
+    }
+
 
 }
