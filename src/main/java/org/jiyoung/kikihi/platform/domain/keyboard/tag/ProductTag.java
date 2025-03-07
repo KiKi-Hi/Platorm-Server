@@ -9,9 +9,7 @@ import lombok.*;
 public class ProductTag {
 
     private Long id;
-
     private Long tagId;
-
     private Long productId;
 
     /// 생성자

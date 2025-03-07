@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 public class ProductTagRequest {
 
-    private String code;
+    private Long productId;
+    private String name;
 
 }

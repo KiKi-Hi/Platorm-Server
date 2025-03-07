@@ -12,22 +12,12 @@ import lombok.NoArgsConstructor;
 public class Tag {
 
     private Long id;
-
     private String name;
 
-    private String code;
-
-    private String description;
-
     ///  생성자
-    public static Tag of(String name,String code, String description) {
+    public static Tag of(String name) {
         return Tag.builder()
                 .name(name)
-                .code(code)
-                .description(description)
                 .build();
     }
-
-
-
 }

@@ -1,5 +1,6 @@
 package org.jiyoung.kikihi.platform.application.out.keyboard.product;
 
+import org.jiyoung.kikihi.platform.adapter.out.redis.product.ProductRedisHash;
 import org.jiyoung.kikihi.platform.domain.keyboard.product.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,5 +20,8 @@ public interface LoadProductPort {
 
     // 조건에 따른 조히
     Page<Product> loadProductsByCondition(Pageable pageable, String productTitle, Double minPrice, Double maxPrice);
+
+    // 임시저장된 product 가져요기
+    Optional<ProductRedisHash> getTemporaryProduct(String userId);
 
 }

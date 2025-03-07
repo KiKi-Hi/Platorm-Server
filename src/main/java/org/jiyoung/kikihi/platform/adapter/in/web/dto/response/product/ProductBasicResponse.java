@@ -2,7 +2,6 @@ package org.jiyoung.kikihi.platform.adapter.in.web.dto.response.product;
 
 import lombok.*;
 import org.jiyoung.kikihi.platform.domain.keyboard.product.Product;
-import org.jiyoung.kikihi.platform.domain.keyboard.product.ProductSnippet;
 
 @Getter
 @Builder

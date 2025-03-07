@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import org.jiyoung.kikihi.platform.domain.keyboard.product.Product;
-import org.jiyoung.kikihi.platform.domain.keyboard.product.ProductSnippet;
 
 import java.util.List;
 

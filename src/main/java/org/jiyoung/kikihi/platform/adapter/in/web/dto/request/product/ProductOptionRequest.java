@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ProductOptionRequest {
 
+    private Long productId;
     private String color;   // 색상
     private String switchType; // 축 설정
     private String layout; // 텐키리스..

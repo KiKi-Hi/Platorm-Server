@@ -1,9 +1,13 @@
 package org.jiyoung.kikihi.platform.domain.keyboard.product;
 
 import lombok.*;
-import org.jiyoung.kikihi.platform.adapter.in.web.dto.request.product.ProductBasicRequest;
 import org.jiyoung.kikihi.platform.adapter.in.web.dto.request.product.ProductRequest;
 import org.jiyoung.kikihi.platform.domain.BaseDomain;
+import org.jiyoung.kikihi.platform.domain.keyboard.tag.ProductTag;
+import org.jiyoung.kikihi.platform.domain.keyboard.tag.Tag;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -13,50 +17,27 @@ public class Product extends BaseDomain {
 
     private Long id;
 
-    private String productName;
-
-    private String description;
-
-    private String categoryCode;
-
-    private int productPrice = 0;
-
-    private ProductSnippet snippet;
-
+    private ProductInfo info;
     private ProductStatistics statistics;
+    private ProductOption options;
+    private ProductImg imgs;
+    private List<ProductTag> tags = new ArrayList<>();
 
-    /// 생성자
-    public static Product from(String name, String description, String categoryCode, int price, ProductSnippet snippet, ProductStatistics statistics) {
-        return Product.builder()
-                .productName(name)
-                .description(description)
-                .categoryCode(categoryCode)
-                .productPrice(price)
-                .snippet(snippet)
-                .statistics(statistics)
-                .build();
-    }
-
-    /// Request
+    // 생성자
     public static Product from(ProductRequest request) {
-
-        // 기본정보로 생성
-        ProductBasicRequest basic = request.getBasic();
-
-
-        ProductSnippet snippet = ProductSnippet.of(basic.getProductTitle(), basic.getBrand(), basic.getManufacturer());
-        ProductStatistics statistics = ProductStatistics.of(0, 0, 0);
-
-        return Product.builder()
-                .productName(basic.getProductName())
-                .description(basic.getDescription())
-                .categoryCode(basic.getCategoryCode())
-                .productPrice(basic.getPrice())
-                .snippet(snippet)
-                .statistics(statistics)
+        // 기본 정보 생성
+        Product product = Product.builder()
+                .info(ProductInfo.of(request.getInfo()))
+                .statistics(ProductStatistics.of())
+                .options(request.getOptions())
+                .tags(request.getTags())
                 .build();
+        return product;
     }
 
-    ///  비즈니스 로직
+    public void addTag(Tag tag) {
+        ProductTag productTag = ProductTag.of(this, tag);
+        tags.add(productTag);
+    }
 
 }

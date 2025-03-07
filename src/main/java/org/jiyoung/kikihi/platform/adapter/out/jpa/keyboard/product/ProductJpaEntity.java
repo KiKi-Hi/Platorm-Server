@@ -40,11 +40,13 @@ public class ProductJpaEntity extends BaseEntity {
     @Embedded
     private ProductStatisticsJpaEntity statistics;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private ProductOptionJpaEntity option;
+
     @org.springframework.data.annotation.Id
     private String elasticsearchId;
 
     // from | DTO를 진짜 JPA 엔티티로!!
-    // 오 주여!!
     public static ProductJpaEntity from(Product product) {
         return ProductJpaEntity.builder()
                 .productName(product.getProductName())

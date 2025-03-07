@@ -3,8 +3,8 @@ package org.jiyoung.kikihi.platform.application.service.not;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.jiyoung.kikihi.platform.adapter.in.web.dto.request.product.*;
+import org.jiyoung.kikihi.platform.adapter.out.redis.product.ProductRedisHash;
 import org.jiyoung.kikihi.platform.application.in.product.CreateTemporaryProductUseCase;
-import org.jiyoung.kikihi.platform.domain.keyboard.product.Product;
 
 @RequiredArgsConstructor
 public class ProductTemporarySaveService implements CreateTemporaryProductUseCase {
@@ -28,12 +28,12 @@ public class ProductTemporarySaveService implements CreateTemporaryProductUseCas
     }
 
     @Override
-    public Product getTemporaryProduct(Long userId) {
+    public ProductRedisHash getTemporaryProduct(Long userId) {
         return null;
     }
 
     // 텍스트 정보 저장
-    private void saveTextInfo(ProductBasicRequest request) {
+    private void saveTextInfo(ProductInfoRequest request) {
         // 예: 세션에 텍스트 정보를 저장
         session.setAttribute("productCategory", request.getCategoryCode());
         session.setAttribute("productName", request.getProductName());
