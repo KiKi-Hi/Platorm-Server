@@ -1,7 +1,7 @@
 package org.jiyoung.kikihi.platform.application.service.keyboard;
 
 import lombok.RequiredArgsConstructor;
-import org.jiyoung.kikihi.platform.application.in.product.ManageStockUseCase;
+import org.jiyoung.kikihi.platform.application.in.keyboard.product.ManageStockUseCase;
 import org.jiyoung.kikihi.platform.application.out.keyboard.product.SaveProductPort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

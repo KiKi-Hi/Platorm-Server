@@ -1,7 +1,7 @@
 package org.jiyoung.kikihi.platform.application.service.keyboard;
 
 import lombok.RequiredArgsConstructor;
-import org.jiyoung.kikihi.platform.application.in.product.GetProductOptionUseCase;
+import org.jiyoung.kikihi.platform.application.in.keyboard.product.GetProductOptionUseCase;
 import org.jiyoung.kikihi.platform.application.out.keyboard.product.OptionPort;
 import org.jiyoung.kikihi.platform.domain.keyboard.product.ProductOption;
 import org.springframework.stereotype.Service;
