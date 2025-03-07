@@ -3,7 +3,7 @@ package org.jiyoung.kikihi.platform.adapter.in.web.category;
 import lombok.RequiredArgsConstructor;
 import org.jiyoung.kikihi.common.response.ApiResponse;
 import org.jiyoung.kikihi.platform.adapter.in.web.dto.request.product.CategoryRequest;
-import org.jiyoung.kikihi.platform.application.in.category.CreateCategoryUseCase;
+import org.jiyoung.kikihi.platform.application.in.keyboard.category.CreateCategoryUseCase;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

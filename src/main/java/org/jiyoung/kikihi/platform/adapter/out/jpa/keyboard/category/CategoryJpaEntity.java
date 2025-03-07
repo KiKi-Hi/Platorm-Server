@@ -16,9 +16,7 @@ public class CategoryJpaEntity {
     @Column(name = "category_id") // 실제 DB 컬럼 이름이 category_id라면...
     private Long categoryId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id") // 부모가 없는 최상위 카테고리 가능
-    private CategoryJpaEntity parent;
+    private Long parentId;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -33,7 +31,7 @@ public class CategoryJpaEntity {
         return CategoryJpaEntity.builder()
                 .categoryId(category.getId())
                 .name(category.getName())
-                .parent(category.getParent() != null ? CategoryJpaEntity.from(category.getParent()) : null)
+                .parentId(category.getParentId() != null ? category.getParentId() : null)
                 .code(category.getCode())
                 .description(category.getDescription())
                 .build();
@@ -44,7 +42,7 @@ public class CategoryJpaEntity {
         return Category.builder()
                 .id(categoryId)
                 .name(name)
-                .parent(parent != null ? parent.toDomain() : null)
+                .parentId(parentId != null ? parentId : null)
                 .code(code)
                 .description(description)
                 .build();

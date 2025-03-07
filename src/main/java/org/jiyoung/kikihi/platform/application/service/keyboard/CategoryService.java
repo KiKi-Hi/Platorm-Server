@@ -3,8 +3,8 @@ package org.jiyoung.kikihi.platform.application.service.keyboard;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.jiyoung.kikihi.platform.adapter.in.web.dto.request.product.CategoryRequest;
-import org.jiyoung.kikihi.platform.application.in.category.CreateCategoryUseCase;
-import org.jiyoung.kikihi.platform.application.in.category.GetCategoryUseCase;
+import org.jiyoung.kikihi.platform.application.in.keyboard.category.CreateCategoryUseCase;
+import org.jiyoung.kikihi.platform.application.in.keyboard.category.GetCategoryUseCase;
 import org.jiyoung.kikihi.platform.application.out.keyboard.category.CategoryPort;
 import org.jiyoung.kikihi.platform.domain.keyboard.category.Category;
 import org.springframework.stereotype.Service;
@@ -23,12 +23,12 @@ public class CategoryService implements CreateCategoryUseCase, GetCategoryUseCas
     public Category createCategory(CategoryRequest request) {
         Category parent = null;
 
-        if (request.getParentId() != null) {
-            parent = categoryPort.loadCategoryById(request.getParentId())
-                    .orElseThrow(() -> new EntityNotFoundException("해당하는 부모가 없습니다."));
+        if (!categoryPort.existsCategory(request.getCode())) {
+            throw new EntityNotFoundException("존재하지 않습니다.");
         }
 
-        Category category = Category.of(parent, request.getName(), request.getCode(), request.getDescription());
+        Category category = Category.of(request.getParentId(), request.getName(), request.getCode(), request.getDescription());
+
         return categoryPort.createCategory(category);
     }
 

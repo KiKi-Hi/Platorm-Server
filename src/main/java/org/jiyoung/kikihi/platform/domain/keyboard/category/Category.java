@@ -10,7 +10,7 @@ public class Category {
 
     private Long id;
 
-    private Category parent;
+    private Long parentId;
 
     private String name;
 
@@ -19,10 +19,10 @@ public class Category {
     private String description;
 
     // of
-    public static Category of(Category parent, String name, String code, String description) {
+    public static Category of(Long parentId, String name, String code, String description) {
         return Category.builder()
                 .name(name)
-                .parent(parent)
+                .parentId(parentId)
                 .code(code)
                 .description(description)
                 .build();
