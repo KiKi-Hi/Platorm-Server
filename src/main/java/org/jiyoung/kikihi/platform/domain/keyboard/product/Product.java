@@ -35,6 +35,7 @@ public class Product extends BaseDomain {
         return Product.builder()
                 .info(ProductInfo.of(request.getInfo()))
                 .statistics(ProductStatistics.of())
+                .userId(request.getUserId())
                 .build();
     }
 

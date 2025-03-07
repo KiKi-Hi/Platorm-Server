@@ -22,6 +22,8 @@ public class ProductJpaEntity extends BaseEntity {
     @Column(nullable = false)
     private Long id;
 
+    private Long userId;
+
     @Embedded
     private ProductInfoJpaEntity info;
 
@@ -39,6 +41,7 @@ public class ProductJpaEntity extends BaseEntity {
         return ProductJpaEntity.builder()
                 .info(ProductInfoJpaEntity.from(product.getInfo()))
                 .statistics(ProductStatisticsJpaEntity.from(product.getStatistics()))
+                .userId(product.getUserId())
                 .build();
     }
 
@@ -48,6 +51,7 @@ public class ProductJpaEntity extends BaseEntity {
                 .id(id)
                 .info(info.toDomain())
                 .statistics(statistics.toDomain())
+                .userId(userId)
                 .build();
     }
 }

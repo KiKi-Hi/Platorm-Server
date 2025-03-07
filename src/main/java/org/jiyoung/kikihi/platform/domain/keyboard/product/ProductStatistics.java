@@ -9,7 +9,6 @@ import lombok.*;
 public class ProductStatistics {
 
     // embedded (0) vs 연관관계 (X)
-    private Long productId;
     private Integer likeCount = 0;
     private Integer commentCount = 0;
     private Integer viewCount = 0;
