@@ -2,6 +2,7 @@ package org.jiyoung.kikihi.platform.adapter.in.web.dto.response.product;
 
 import lombok.*;
 import org.jiyoung.kikihi.platform.domain.keyboard.product.Product;
+import org.jiyoung.kikihi.platform.domain.keyboard.product.ProductInfo;
 
 @Getter
 @Builder
@@ -22,15 +23,16 @@ public class ProductBasicResponse {
 
     /// from
     public static ProductBasicResponse from(Product product) {
-        ProductSnippet snippet = product.getSnippet();
+
+        ProductInfo info = product.getInfo();
 
         return ProductBasicResponse.builder()
-                .categoryId(product.getCategoryCode())
-                .productName(product.getProductName())
-                .brand(snippet.getBrand())
-                .productPrice(product.getProductPrice())
-                .productTitle(snippet.getProductTitle()) // productTitle 필드가 Product 엔티티에 있어야 함
-                .manufacturer(snippet.getManufacturer())
+                .categoryId(info.getCategoryCode())
+                .productName(info.getProductName())
+                .brand(info.getBrand())
+                .productPrice(info.getProductPrice())
+                .productTitle(info.getProductTitle()) // productTitle 필드가 Product 엔티티에 있어야 함
+                .manufacturer(info.getManufacturer())
                 .build();
     }
 

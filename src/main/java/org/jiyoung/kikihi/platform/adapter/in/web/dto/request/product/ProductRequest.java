@@ -20,5 +20,6 @@ public class ProductRequest {
     // 최대 5개의 태그 선택
     private List<ProductTagRequest> tags;
 
+    private Long userId;
 
 }

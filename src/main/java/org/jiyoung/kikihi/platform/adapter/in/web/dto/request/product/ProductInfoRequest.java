@@ -5,7 +5,6 @@ import lombok.Data;
 @Data
 public class ProductInfoRequest {
 
-    private Long productId;
     private String productName;
     private String description;
     private String categoryCode;

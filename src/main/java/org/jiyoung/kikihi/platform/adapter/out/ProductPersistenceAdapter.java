@@ -24,7 +24,8 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 public class ProductPersistenceAdapter implements LoadProductPort, SaveProductPort, DeleteProductPort {
-/*
+
+    /*
         Redis와 JPA 복합 사용 Adapter
      */
 
@@ -105,8 +106,8 @@ public class ProductPersistenceAdapter implements LoadProductPort, SaveProductPo
      * Redis에서 특정 사용자의 임시 저장된 상품을 조회하는 메서드
      */
     @Override
-    public Optional<ProductRedisHash> getTemporaryProduct(String userId) {
-        return redisRepository.findById(Long.valueOf(userId));  // Redis에서 사용자 ID로 임시 저장된 상품 조회
+    public Optional<ProductRedisHash> getTemporaryProductByUserId(Long userId) {
+        return redisRepository.findByUserId(userId);
     }
 
     /**

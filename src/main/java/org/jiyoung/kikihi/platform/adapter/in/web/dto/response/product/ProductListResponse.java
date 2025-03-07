@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import org.jiyoung.kikihi.platform.domain.keyboard.product.Product;
+import org.jiyoung.kikihi.platform.domain.keyboard.product.ProductInfo;
 
 import java.util.List;
 
@@ -25,15 +26,15 @@ public class ProductListResponse {
     private String manufacturer;
 
     public static ProductListResponse from(Product entity) {
-        ProductSnippet snippet = entity.getSnippet();
+        ProductInfo info = entity.getInfo();
 
         return ProductListResponse.builder()
-                .categoryName(entity.getCategoryCode())
-                .productName(entity.getProductName())
-                .productTitle(snippet.getProductTitle())
-                .productPrice(entity.getProductPrice())
-                .brand(snippet.getBrand())
-                .manufacturer(snippet.getManufacturer())
+                .categoryName(info.getProductName())
+                .productName(info.getProductName())
+                .productTitle(info.getProductTitle())
+                .productPrice(info.getProductPrice())
+                .brand(info.getBrand())
+                .manufacturer(info.getManufacturer())
                 .build();
     }
 

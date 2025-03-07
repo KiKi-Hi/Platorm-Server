@@ -27,5 +27,12 @@ public class ProductDetailResponse {
                 .build();
     }
 
+    public static ProductDetailResponse from(Product product) {
+
+        return ProductDetailResponse.builder()
+                .basic(ProductBasicResponse.from(product))
+                .build();
+    }
+
     
 }

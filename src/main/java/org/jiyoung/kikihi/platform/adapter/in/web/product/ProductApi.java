@@ -6,13 +6,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.jiyoung.kikihi.common.response.ApiResponse;
 import org.jiyoung.kikihi.common.response.pageable.PageRequest;
 import org.jiyoung.kikihi.common.response.pageable.PageResponse;
-import org.jiyoung.kikihi.platform.adapter.in.web.dto.request.product.ProductRequest;
 import org.jiyoung.kikihi.platform.adapter.in.web.dto.response.product.ProductDetailResponse;
 import org.jiyoung.kikihi.platform.adapter.in.web.dto.response.product.ProductListResponse;
-import org.jiyoung.kikihi.platform.application.in.product.CreateProductUseCase;
-import org.jiyoung.kikihi.platform.application.in.product.GetProductOptionUseCase;
-import org.jiyoung.kikihi.platform.application.in.product.GetProductUseCase;
-import org.jiyoung.kikihi.platform.application.in.product.ManageStockUseCase;
+import org.jiyoung.kikihi.platform.application.in.keyboard.product.CreateProductUseCase;
+import org.jiyoung.kikihi.platform.application.in.keyboard.product.GetProductOptionUseCase;
+import org.jiyoung.kikihi.platform.application.in.keyboard.product.GetProductUseCase;
+import org.jiyoung.kikihi.platform.application.in.keyboard.product.ManageStockUseCase;
 import org.jiyoung.kikihi.platform.application.out.keyboard.product.DeleteProductPort;
 import org.jiyoung.kikihi.platform.domain.keyboard.product.Product;
 import org.jiyoung.kikihi.platform.domain.keyboard.product.ProductOption;
@@ -35,14 +34,16 @@ public class ProductApi {
     private final GetProductUseCase getService;
     private final GetProductOptionUseCase optionService;
     private final ManageStockUseCase manageStockService;
+
     /**
      * Redis에서 임시 저장된 제품을 실제 DB에 저장
      */
-    @PostMapping("/{productId}/save")
-    public ApiResponse<String> submitTemporaryProduct(@PathVariable String productId) {
-        Product savedProduct = createService.saveProductFromRedis(productId);
+    @PostMapping("/save")
+    public ApiResponse<String> submitTemporaryProduct(@RequestBody TempProductSaveRequest request ) {
+        Product savedProduct = createService.createProductByTemp(request.getUserId(), request.getIndex());
         return ApiResponse.ok("Product saved successfully");
     }
+
     // 상품 상세 조회
     @GetMapping("/{productId}")
     public ApiResponse<ProductDetailResponse> getProductById(@PathVariable("productId") Long productId) {

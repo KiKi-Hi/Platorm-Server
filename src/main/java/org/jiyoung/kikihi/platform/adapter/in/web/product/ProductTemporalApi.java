@@ -1,11 +1,11 @@
 package org.jiyoung.kikihi.platform.adapter.in.web.product;
 
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jiyoung.kikihi.common.response.ApiResponse;
 import org.jiyoung.kikihi.platform.adapter.in.web.dto.request.product.ProductRequest;
-import org.jiyoung.kikihi.platform.application.in.product.CreateTemporaryProductUseCase;
+import org.jiyoung.kikihi.platform.adapter.in.web.dto.response.product.ProductDetailResponse;
+import org.jiyoung.kikihi.platform.application.in.keyboard.product.TemporaryProductUseCase;
 import org.jiyoung.kikihi.platform.domain.keyboard.product.Product;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class ProductTemporalApi {
 
 
-    private final CreateTemporaryProductUseCase temporaryService;
+    private final TemporaryProductUseCase temporaryService;
 
     // 임시 저장 요청
     @PostMapping("/temporary/save")
@@ -33,8 +33,12 @@ public class ProductTemporalApi {
         등록한 사람도 저장한다.
      */
 
+    // 사용자별 임시 목록 조회
+    @GetMapping("/temporary/{userId}")
+    public ApiResponse<ProductDetailResponse> getTemporaryProduct(@PathVariable("userId") Long userId) {
+        Product domain = temporaryService.getTemporaryProduct(userId).toDomain();
 
-
-
+        return ApiResponse.created(ProductDetailResponse.from(domain));
+    }
 }
 
