@@ -22,20 +22,8 @@ public class ProductJpaEntity extends BaseEntity {
     @Column(nullable = false)
     private Long id;
 
-    @Column(name = "product_name", nullable = false)
-    private String productName;
-
-    @Column(name = "description", columnDefinition = "TEXT")
-    private String description;
-
-    @Column(name = "category_code", nullable = false)
-    private String categoryCode;
-
-    @Column(nullable = false, columnDefinition = "INT DEFAULT 0")
-    private int productPrice = 0;
-
     @Embedded
-    private ProductSnippetJpaEntity snippet;
+    private ProductInfoJpaEntity info;
 
     @Embedded
     private ProductStatisticsJpaEntity statistics;
@@ -49,11 +37,7 @@ public class ProductJpaEntity extends BaseEntity {
     // from | DTO를 진짜 JPA 엔티티로!!
     public static ProductJpaEntity from(Product product) {
         return ProductJpaEntity.builder()
-                .productName(product.getProductName())
-                .description(product.getDescription())
-                .categoryCode(product.getCategoryCode())
-                .productPrice(product.getProductPrice())
-                .snippet(ProductSnippetJpaEntity.from(product.getSnippet()))
+                .info(ProductInfoJpaEntity.from(product.getInfo()))
                 .statistics(ProductStatisticsJpaEntity.from(product.getStatistics()))
                 .build();
     }
@@ -62,11 +46,7 @@ public class ProductJpaEntity extends BaseEntity {
     public Product toDomain(){
         return Product.builder()
                 .id(id)
-                .productName(productName)
-                .categoryCode(categoryCode)
-                .productPrice(productPrice)
-                .description(description)
-                .snippet(snippet.toDomain())
+                .info(info.toDomain())
                 .statistics(statistics.toDomain())
                 .build();
     }

@@ -10,7 +10,8 @@ import java.util.Optional;
 
 @Repository
 public interface ProductRedisRepository extends CrudRepository<ProductRedisHash, Long> {
-    //재고 -1
+
+    // 재고 -1
     final RedisTemplate<String,Integer> redisTemplate = new RedisTemplate<>();
     static final String STOCK_KEY_PREFIX="product:stock";
 
@@ -18,12 +19,12 @@ public interface ProductRedisRepository extends CrudRepository<ProductRedisHash,
         return STOCK_KEY_PREFIX + productId;
     }
 
-    //재고 조회
+    // 재고 조회
     public default Optional<Integer> findStockById(Long productId){
         Integer stock=redisTemplate.opsForValue().get(getStockKey(productId));
         return Optional.ofNullable(stock);
     }
-    //재고 감소
+    // 재고 감소
     public default boolean decreaseStock(Long productId, Integer quantity) {
         String key = getStockKey(productId);
 
@@ -48,5 +49,8 @@ public interface ProductRedisRepository extends CrudRepository<ProductRedisHash,
     public default void setStock(Long productId, Integer stock) {
         redisTemplate.opsForValue().set(getStockKey(productId), stock);
     }
+
+    /// 유저 ID를 바탕으로 임시저장 목록 가져오기
+    Optional<ProductRedisHash> findByUserId(Long userId);
 
 }

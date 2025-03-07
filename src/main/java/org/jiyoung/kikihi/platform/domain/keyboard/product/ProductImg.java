@@ -1,6 +1,8 @@
 package org.jiyoung.kikihi.platform.domain.keyboard.product;
 
 import lombok.*;
+import org.jiyoung.kikihi.platform.adapter.in.web.dto.request.product.ProductImgRequest;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -18,17 +20,21 @@ public class ProductImg {
     private List<String> descriptionImgs;
     private String descriptionHtml;
 
-
-
-    /// 팩토리 메서드 (DTO → 도메인 변환)
-    public static ProductImg from(ProductImg productImg) {
+    /// 생성자
+    public static ProductImg of(ProductImgRequest request) {
         return ProductImg.builder()
-                .productId(productImg.getProductId())
-                .thumbnailImg(productImg.getThumbnailImg())
-                .mainImgs(List.copyOf(productImg.getMainImgs()))  // 불변 리스트
-                .descriptionImgs(List.copyOf(productImg.getDescriptionImgs()))
-                .descriptionHtml(productImg.getDescriptionHtml())
+                .productId(request.getProductId())
+                .thumbnailImg(request.getThumbnailImage())
+                .mainImgs(List.copyOf(request.getMainImages()))  // 불변 리스트
+                .descriptionImgs(List.copyOf(request.getDescriptionImages()))
+                .descriptionHtml(request.getDescriptionHtml())
                 .build();
+    }
+
+    /// LIST 생성자, 기존의 of생성자를 활용하여 만들었다.
+    public static List<ProductImg> of(List<ProductImgRequest> requests) {
+        return requests.stream()
+                .map(ProductImg::of).toList();
     }
 
     /// 값 비교를 위한 equals & hashCode 오버라이딩

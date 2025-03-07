@@ -20,17 +20,11 @@ public class TagJpaEntity {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    private String code;
-
-    private String description;
-
     // from
     public static TagJpaEntity from(Tag tag) {
         return TagJpaEntity.builder()
                 .tagId(tag.getId())
                 .name(tag.getName())
-                .code(tag.getCode())
-                .description(tag.getDescription())
                 .build();
     }
 
@@ -39,8 +33,6 @@ public class TagJpaEntity {
         return Tag.builder()
                 .id(tagId)
                 .name(name)
-                .code(code)
-                .description(description)
                 .build();
     }
 }
