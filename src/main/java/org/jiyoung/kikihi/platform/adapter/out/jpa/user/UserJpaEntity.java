@@ -1,4 +1,4 @@
-package org.jiyoung.kikihi.domain.user.domain;
+package org.jiyoung.kikihi.platform.adapter.out.jpa.user;
 
 import jakarta.persistence.*;
 import lombok.*;

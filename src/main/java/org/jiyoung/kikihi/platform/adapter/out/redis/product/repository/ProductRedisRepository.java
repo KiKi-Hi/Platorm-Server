@@ -1,5 +1,6 @@
-package org.jiyoung.kikihi.platform.adapter.out.redis.product;
+package org.jiyoung.kikihi.platform.adapter.out.redis.product.repository;
 
+import org.jiyoung.kikihi.platform.adapter.out.redis.product.ProductRedisHash;
 import org.springframework.data.redis.connection.ReturnType;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -11,6 +12,9 @@ import java.util.Optional;
 
 @Repository
 public interface ProductRedisRepository extends CrudRepository<ProductRedisHash, Long> {
+
+    // 유저 ID를 바탕으로 임시저장 목록 가져오기
+    List<ProductRedisHash> findAllByUserId(Long userId);
 
     // 재고 -1
     final RedisTemplate<String,Integer> redisTemplate = new RedisTemplate<>();
@@ -51,7 +55,5 @@ public interface ProductRedisRepository extends CrudRepository<ProductRedisHash,
         redisTemplate.opsForValue().set(getStockKey(productId), stock);
     }
 
-    /// 유저 ID를 바탕으로 임시저장 목록 가져오기
-    List<ProductRedisHash> findAllByUserId(Long userId);
 
 }

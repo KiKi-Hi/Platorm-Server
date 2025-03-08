@@ -4,15 +4,18 @@ package org.jiyoung.kikihi.platform.adapter.out.redis.product;
 import lombok.Builder;
 import lombok.Getter;
 import org.jiyoung.kikihi.platform.domain.keyboard.product.ProductOption;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.index.Indexed;
+
+import java.util.List;
 
 @Getter
 @Builder
 @RedisHash("ProductOption")
 public class ProductOptionRedisHash {
-
-    private Long id;
+    @Id
+    private Long id;  // 또는 해당 엔티티의 고유한 식별자 타입을 사용
 
     @Indexed
     private Long productId;
@@ -21,30 +24,37 @@ public class ProductOptionRedisHash {
     private String switchType;
     private String layout;
     private boolean isWireless;
-    private int extraPrice;
 
     // from 도메인
-    public static ProductOptionRedisHash from(ProductOption productOption) {
+    public static ProductOptionRedisHash of(ProductOption productOption) {
         return ProductOptionRedisHash.builder()
-                .id(productOption.getId())
                 .productId(productOption.getProductId())
                 .color(productOption.getColor())
                 .switchType(productOption.getSwitchType())
                 .layout(productOption.getLayout())
                 .isWireless(productOption.isWireless())
-                .extraPrice(productOption.getExtraPrice())
                 .build();
     }
+
+
+    public static ProductOptionRedisHash from(ProductOption productOption) {
+        return ProductOptionRedisHash.builder()
+                .productId(productOption.getProductId())
+                .color(productOption.getColor())
+                .switchType(productOption.getSwitchType())
+                .layout(productOption.getLayout())
+                .isWireless(productOption.isWireless())
+                .build();
+    }
+
     // toDomain
     public ProductOption toDomain() {
         return ProductOption.builder()
-                .id(id)
                 .productId(productId)
                 .color(color)
                 .switchType(switchType)
                 .layout(layout)
                 .isWireless(isWireless)
-                .extraPrice(extraPrice)
                 .build();
     }
 

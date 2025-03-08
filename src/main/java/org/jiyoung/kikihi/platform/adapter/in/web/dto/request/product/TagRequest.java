@@ -5,9 +5,10 @@ import lombok.Getter;
 
 @Data
 @Getter
-public class ProductTagRequest {
+public class TagRequest {
 
-    private Long productId;
+    private Long id;
     private String name;
+
 
 }

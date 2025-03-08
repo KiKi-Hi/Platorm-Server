@@ -2,6 +2,7 @@ package org.jiyoung.kikihi.platform.application.service.user;
 
 import lombok.RequiredArgsConstructor;
 import org.jiyoung.kikihi.platform.adapter.in.web.dto.request.user.JoinRequest;
+import org.jiyoung.kikihi.platform.adapter.out.jpa.user.UserJpaEntity;
 import org.jiyoung.kikihi.platform.adapter.out.jpa.user.UserJpaRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class UserService {
         if (isExist) {
             throw new IllegalArgumentException("이미 존재하는 이메일입니다.");
         }
-        org.jiyoung.kikihi.domain.user.domain.UserJpaEntity userJpaEntity = userRepository.save(org.jiyoung.kikihi.domain.user.domain.UserJpaEntity.from(email, bCryptPasswordEncoder.encode(password), name));
+        UserJpaEntity userJpaEntity = userRepository.save(UserJpaEntity.from(email, bCryptPasswordEncoder.encode(password), name));
         System.out.println(userJpaEntity.getEmail()+":"+ userJpaEntity.getPassword()+":"+ userJpaEntity.getRole());
     }
 

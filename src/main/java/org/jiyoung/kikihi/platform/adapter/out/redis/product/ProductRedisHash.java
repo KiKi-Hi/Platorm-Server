@@ -26,15 +26,18 @@ public class ProductRedisHash{
 
     private ProductInfoRedisHash info;
     private ProductStatisticsRedisHash statistics;
+    private ProductOptionRedisHash options;
+    private ProductImgRedisHash imgs;
+    private TagRedisHash tags;
+
 
     /// 생성자 , 도메인에서 레디스 해쉬를 만들어야 합니다.
     public static ProductRedisHash of(Product product) {
-
         return ProductRedisHash.builder()
                 .id(product.getId())
                 .userId(product.getUserId())
                 .info(ProductInfoRedisHash.of(product.getInfo()))
-                .statistics(ProductStatisticsRedisHash.of(product.getStatistics()))
+                .statistics(ProductStatisticsRedisHash.of())
                 .build();
     }
 

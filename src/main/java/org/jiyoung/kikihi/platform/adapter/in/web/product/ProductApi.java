@@ -7,8 +7,8 @@ import org.jiyoung.kikihi.common.response.ApiResponse;
 import org.jiyoung.kikihi.common.response.pageable.PageRequest;
 import org.jiyoung.kikihi.common.response.pageable.PageResponse;
 import org.jiyoung.kikihi.platform.adapter.in.web.dto.request.product.ProductRequest;
-import org.jiyoung.kikihi.platform.adapter.in.web.dto.response.product.ProductDetailResponse;
-import org.jiyoung.kikihi.platform.adapter.in.web.dto.response.product.ProductListResponse;
+import org.jiyoung.kikihi.platform.adapter.in.web.dto.response.product.ProductResponse;
+import org.jiyoung.kikihi.platform.adapter.in.web.dto.response.product.ProductInfoResponse;
 import org.jiyoung.kikihi.platform.application.in.keyboard.product.CreateProductUseCase;
 import org.jiyoung.kikihi.platform.application.in.keyboard.product.GetProductOptionUseCase;
 import org.jiyoung.kikihi.platform.application.in.keyboard.product.GetProductUseCase;
@@ -20,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,12 +49,12 @@ public class ProductApi {
     ///  조회
     // 상품 상세 조회
     @GetMapping("/{productId}")
-    public ApiResponse<ProductDetailResponse> getProductById(@PathVariable("productId") Long productId) {
+    public ApiResponse<ProductResponse> getProductById(@PathVariable("productId") Long productId) {
 
         Product product = getService.getProductById(productId)
                 .orElseThrow(() -> new EntityNotFoundException("해당 상품은 존재하지 않습니다."));
 
-        return ApiResponse.ok(ProductDetailResponse.from(product));
+        return ApiResponse.ok(ProductResponse.from(product));
     }
 
     // 재고 조회
@@ -65,7 +66,7 @@ public class ProductApi {
 
     // 상품 목록 조회하기
     @GetMapping("/list")
-    public ApiResponse<PageResponse<ProductListResponse>> list(PageRequest pageRequest) {
+    public ApiResponse<PageResponse<ProductInfoResponse>> list(PageRequest pageRequest) {
         Pageable pageable = org.springframework.data.domain.PageRequest.of(
                 pageRequest.getPage() - 1,
                 pageRequest.getSize(),
@@ -73,14 +74,13 @@ public class ProductApi {
         );
 
         Page<Product> result = getService.getProducts(pageable);
-        List<ProductListResponse> dtolist = ProductListResponse.from(result.getContent());
-
+        List<ProductInfoResponse> dtolist = List.of((ProductInfoResponse.from(((Product) result.getContent()).getInfo())));
         return ApiResponse.ok(new PageResponse<>(dtolist, pageRequest, result.getTotalElements()));
     }
 
     // 상품 목록 제공 (페이징, 정렬, 필터링)
     @GetMapping
-    public ApiResponse<PageResponse<ProductListResponse>> getAllProducts(
+    public ApiResponse<PageResponse<ProductInfoResponse>> getAllProducts(
             PageRequest pageRequest,
             @RequestParam(value = "productTitle", required = false) String productTitle,
             @RequestParam(value = "minPrice", required = false) Double minPrice,
@@ -93,7 +93,7 @@ public class ProductApi {
         );
 
         Page<Product> result = getService.getProductsByCondition(pageable, productTitle, minPrice, maxPrice);
-        List<ProductListResponse> dtolist = ProductListResponse.from(result.getContent());
+        List<ProductInfoResponse> dtolist =List.of((ProductInfoResponse.from(((Product) result.getContent()).getInfo())));
 
         return ApiResponse.ok(new PageResponse<>(dtolist, pageRequest, result.getTotalElements()));
     }

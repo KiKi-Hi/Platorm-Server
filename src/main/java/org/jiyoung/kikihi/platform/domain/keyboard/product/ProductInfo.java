@@ -31,6 +31,7 @@ public class ProductInfo {
                 .brand(request.getBrand())
                 .manufacturer(request.getManufacturer())
                 .build();
-
     }
+
+
 }

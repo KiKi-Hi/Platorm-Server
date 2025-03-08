@@ -13,19 +13,31 @@ import java.io.Serializable;
 @AllArgsConstructor
 @RedisHash(value = "productStatistics", timeToLive = 86400) // 1일 TTL
 public class ProductStatisticsRedisHash {
+    @Id
+    private Long id;
 
     private Integer likeCount = 0;
     private Integer commentCount = 0;
     private Integer viewCount = 0;
 
     /// 생성자
-    public static ProductStatisticsRedisHash of(ProductStatistics statistics) {
+//    public static ProductStatisticsRedisHash of(ProductStatistics statistics) {
+//        return ProductStatisticsRedisHash.builder()
+//                .likeCount(statistics.getLikeCount())
+//                .commentCount(statistics.getCommentCount())
+//                .viewCount(statistics.getViewCount())
+//                .build();
+//    }
+
+    public static ProductStatisticsRedisHash of() {
         return ProductStatisticsRedisHash.builder()
-                .likeCount(statistics.getLikeCount())
-                .commentCount(statistics.getCommentCount())
-                .viewCount(statistics.getViewCount())
+                .likeCount(0)
+                .commentCount(0)
+                .viewCount(0)
                 .build();
     }
+
+
 
     ///  Domain
     public ProductStatistics toDomain(){

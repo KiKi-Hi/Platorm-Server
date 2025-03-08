@@ -21,20 +21,21 @@ public class ProductImg {
     private String descriptionHtml;
 
     /// 생성자
-    public static ProductImg of(ProductImgRequest request) {
-        return ProductImg.builder()
-                .productId(request.getProductId())
-                .thumbnailImg(request.getThumbnailImage())
-                .mainImgs(List.copyOf(request.getMainImages()))  // 불변 리스트
-                .descriptionImgs(List.copyOf(request.getDescriptionImages()))
+    public static List<ProductImg> of(ProductImgRequest request) {
+        return List.of(ProductImg.builder()
+                .thumbnailImg(request.getThumbnailImg())
+                .mainImgs(request.getMainImgs())
+                .descriptionImgs(request.getDescriptionImgs())
                 .descriptionHtml(request.getDescriptionHtml())
-                .build();
+                .build());
     }
 
     /// LIST 생성자, 기존의 of생성자를 활용하여 만들었다.
     public static List<ProductImg> of(List<ProductImgRequest> requests) {
         return requests.stream()
-                .map(ProductImg::of).toList();
+                .map(ProductImg::of)
+                .flatMap(List::stream)
+                .toList();
     }
 
     /// 값 비교를 위한 equals & hashCode 오버라이딩
@@ -52,5 +53,9 @@ public class ProductImg {
     @Override
     public int hashCode() {
         return Objects.hash(thumbnailImg, mainImgs, descriptionImgs, descriptionHtml);
+    }
+
+    public void changeProductId(Long id) {
+        this.productId = id;
     }
 }

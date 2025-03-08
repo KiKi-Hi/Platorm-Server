@@ -3,8 +3,6 @@ package org.jiyoung.kikihi.platform.adapter.out;
 import lombok.RequiredArgsConstructor;
 import org.jiyoung.kikihi.platform.adapter.out.jpa.keyboard.product.ProductOptionJpaEntity;
 import org.jiyoung.kikihi.platform.adapter.out.jpa.keyboard.product.ProductOptionJpaRepository;
-import org.jiyoung.kikihi.platform.adapter.out.redis.product.ProductOptionRedisHash;
-import org.jiyoung.kikihi.platform.adapter.out.redis.product.ProductOptionRedisRepository;
 import org.jiyoung.kikihi.platform.application.out.keyboard.product.OptionPort;
 import org.jiyoung.kikihi.platform.domain.keyboard.product.ProductOption;
 import org.springframework.stereotype.Component;

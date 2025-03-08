@@ -1,5 +1,6 @@
-package org.jiyoung.kikihi.platform.adapter.out.redis.product;
+package org.jiyoung.kikihi.platform.adapter.out.redis.product.repository;
 
+import org.jiyoung.kikihi.platform.adapter.out.redis.product.ProductOptionRedisHash;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

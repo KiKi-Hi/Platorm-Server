@@ -3,6 +3,7 @@ package org.jiyoung.kikihi.platform.adapter.out.redis.product;
 
 import lombok.*;
 import org.jiyoung.kikihi.platform.domain.keyboard.product.ProductInfo;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 
 import java.io.Serializable;
@@ -13,6 +14,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @RedisHash(value = "productInfo", timeToLive = 3600) // 1시간 TTL
 public class ProductInfoRedisHash implements Serializable {
+    @Id
+    private Long id;  // 또는 해당 엔티티의 고유한 식별자 타입을 사용
 
     private String productName;
     private String description;
@@ -35,6 +38,8 @@ public class ProductInfoRedisHash implements Serializable {
                 .manufacturer(info.getManufacturer())
                 .build();
     }
+
+
 
     /// ToDomain
     public ProductInfo toDomain(){

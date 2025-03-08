@@ -18,7 +18,7 @@ public class ProductRequest {
     private List<ProductImgRequest> imgs;
 
     // 최대 5개의 태그 선택
-    private List<ProductTagRequest> tags;
+    private List<TagRequest> tags;
 
     private Long userId;
 

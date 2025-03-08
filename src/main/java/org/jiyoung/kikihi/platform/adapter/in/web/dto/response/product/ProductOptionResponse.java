@@ -1,5 +1,6 @@
 package org.jiyoung.kikihi.platform.adapter.in.web.dto.response.product;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,11 +15,17 @@ import java.util.List;
 @AllArgsConstructor
 public class ProductOptionResponse {
 
+    @JsonProperty("color")
     private String color;   // 색상
-    private String switchType;
-    private String layout;
-    private boolean isWireless;
 
+    @JsonProperty("switch_type")
+    private String switchType;
+
+    @JsonProperty("layout")
+    private String layout;
+
+    @JsonProperty("is_wireless")
+    private boolean isWireless;
 
     // 단일 옵션 변경
     public static ProductOptionResponse from(ProductOption productOption) {

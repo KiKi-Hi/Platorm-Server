@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.jiyoung.kikihi.common.security.domain.CustomUserDetails;
 import org.jiyoung.kikihi.common.security.util.JWTUtil;
+import org.jiyoung.kikihi.platform.adapter.out.jpa.user.UserJpaEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -116,7 +117,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         // 사용자 정보를 기반으로 user객체 생성
         // JWT 토큰에서 이메일을 추출하고, 임시로 비밀번호를 설정하여 User 객체를 생성
-        org.jiyoung.kikihi.domain.user.domain.UserJpaEntity userJpaEntity = org.jiyoung.kikihi.domain.user.domain.UserJpaEntity.builder().email(email).password("temppass").build();
+        UserJpaEntity userJpaEntity = UserJpaEntity.builder().email(email).password("temppass").build();
         CustomUserDetails customUserDetails = new CustomUserDetails(userJpaEntity);
 
         // Spring Security의 인증 토큰 생성

@@ -3,6 +3,7 @@ package org.jiyoung.kikihi.platform.domain.keyboard.product;
 import lombok.*;
 import org.jiyoung.kikihi.platform.adapter.in.web.dto.request.product.ProductRequest;
 import org.jiyoung.kikihi.platform.domain.BaseDomain;
+import org.jiyoung.kikihi.platform.domain.keyboard.tag.Tag;
 
 import java.util.*;
 
@@ -32,24 +33,40 @@ public class Product extends BaseDomain {
     ///     단점 : 성능 속도가 느림.
     /// 맺게되면 양방향 의존관계를 맺어줘야하기 때문에.
 
+//    public static ProductResponse from(Product product) {
+//        return ProductResponse.builder()
+//                .info(product.)
+//                .build();
+//    }
     // 생성자
     public static Product of(ProductRequest request) {
         // 기본 정보 생성
         return Product.builder()
                 .info(ProductInfo.of(request.getInfo()))
-                .statistics(ProductStatistics.of())
                 .userId(request.getUserId())
                 .build();
-    }
 
-    // ! ---
+
+    }
 
     // 출력을 위한 저장
     // !! 생성에서 사용하지 않음 !!
     private List<ProductOption> options;
+    private List<Tag> tags;
+    private List<ProductImg> imgs;
+
+
 
     public void changeOptions(List<ProductOption> options) {
         this.options = options;
+    }
+
+    public void changeTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public void changeImages(List<ProductImg> imgs) {
+        this.imgs = imgs;
     }
 
 

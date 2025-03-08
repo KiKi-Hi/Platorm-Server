@@ -1,6 +1,7 @@
 package org.jiyoung.kikihi.common.security.domain;
 
 import lombok.RequiredArgsConstructor;
+import org.jiyoung.kikihi.platform.adapter.out.jpa.user.UserJpaEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,7 +10,7 @@ import java.util.Collection;
 
 @RequiredArgsConstructor  // 생성자 자동 생성: final 필드를 가지는 생성자를 생성
 public class CustomUserDetails implements UserDetails {
-    private final org.jiyoung.kikihi.domain.user.domain.UserJpaEntity user;  // User 객체를 포함하여 사용자 정보를 담고 있음
+    private final UserJpaEntity user;  // User 객체를 포함하여 사용자 정보를 담고 있음
 
     // 사용자의 권한 정보를 반환하는 메서드
     @Override

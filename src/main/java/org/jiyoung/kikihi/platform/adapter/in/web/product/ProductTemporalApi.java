@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.jiyoung.kikihi.common.response.ApiResponse;
 import org.jiyoung.kikihi.platform.adapter.in.web.dto.request.product.ProductRequest;
 import org.jiyoung.kikihi.platform.adapter.in.web.dto.request.product.TempProductGetRequest;
-import org.jiyoung.kikihi.platform.adapter.in.web.dto.response.product.ProductDetailResponse;
+import org.jiyoung.kikihi.platform.adapter.in.web.dto.response.product.ProductResponse;
 import org.jiyoung.kikihi.platform.application.in.keyboard.product.TemporaryProductUseCase;
 import org.jiyoung.kikihi.platform.domain.keyboard.product.Product;
 import org.springframework.web.bind.annotation.*;
@@ -32,19 +32,23 @@ public class ProductTemporalApi {
 
     // 사용자별 임시 목록 조회
     @GetMapping("/temporary/{userId}")
-    public ApiResponse<List<ProductDetailResponse>> getTemporaryProduct(@PathVariable("userId") Long userId) {
+    public ApiResponse<List<ProductResponse>> getTemporaryProduct(@PathVariable("userId") Long userId) {
         List<Product> products = temporaryService.getTemporaryProductsByUserId(userId);
+        System.out.println(products);
 
-        return ApiResponse.ok(ProductDetailResponse.from(products));
+        List<ProductResponse> productResponse = products.stream()
+                .map(ProductResponse::from)
+                .toList();
+        return ApiResponse.ok(productResponse);
     }
 
     // 임시 저장 값 가져오기
     @GetMapping("/temporary")
-    public ApiResponse<ProductDetailResponse> getTemporaryProducts(@RequestBody TempProductGetRequest request) {
+    public ApiResponse<ProductResponse> getTemporaryProducts(@RequestBody TempProductGetRequest request) {
         Product product = temporaryService.getTemporaryProductByIndexAndUserId(request.getUserId(), request.getIndex())
                 .orElseThrow(() -> new EntityNotFoundException("해당하는 임시저장 객체가 존재하지 않습니다."));
 
-        return ApiResponse.ok(ProductDetailResponse.from(product));
+        return ApiResponse.ok(ProductResponse.from(product));
     }
 }
 
