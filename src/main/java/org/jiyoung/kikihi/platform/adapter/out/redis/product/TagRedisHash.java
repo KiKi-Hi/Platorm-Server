@@ -2,14 +2,11 @@ package org.jiyoung.kikihi.platform.adapter.out.redis.product;
 
 import lombok.Builder;
 import lombok.Getter;
-import org.jiyoung.kikihi.platform.adapter.in.web.dto.request.product.TagRequest;
 import org.jiyoung.kikihi.platform.domain.keyboard.tag.ProductTag;
 import org.jiyoung.kikihi.platform.domain.keyboard.tag.Tag;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.index.Indexed;
-
-import java.util.List;
 
 @RedisHash("Tag")
 @Getter

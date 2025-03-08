@@ -19,11 +19,8 @@ public class CustomUserDetails implements UserDetails {
         Collection<GrantedAuthority> collection = new ArrayList<>();
 
         // 사용자의 역할을 권한으로 추가
-        collection.add(new GrantedAuthority() {
-            @Override
-            public String getAuthority() {
-                return user.getRole();  // 사용자 역할 반환
-            }
+        collection.add((GrantedAuthority) () -> {
+            return user.getRole();  // 사용자 역할 반환
         });
         return collection;  // 권한 리스트 반환
     }

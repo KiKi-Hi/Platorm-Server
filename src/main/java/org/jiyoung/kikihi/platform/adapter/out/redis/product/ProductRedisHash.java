@@ -3,12 +3,8 @@ package org.jiyoung.kikihi.platform.adapter.out.redis.product;
 import jakarta.persistence.*;
 import lombok.*;
 import org.jiyoung.kikihi.platform.domain.keyboard.product.Product;
-import org.jiyoung.kikihi.platform.domain.keyboard.product.ProductImg;
-import org.jiyoung.kikihi.platform.domain.keyboard.product.ProductInfo;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.index.Indexed;
-
-import java.io.Serializable;
 
 @Getter
 @Setter

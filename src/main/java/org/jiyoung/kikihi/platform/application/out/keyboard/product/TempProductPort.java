@@ -4,7 +4,6 @@ import org.jiyoung.kikihi.platform.adapter.out.redis.product.ProductRedisHash;
 import org.jiyoung.kikihi.platform.domain.keyboard.product.Product;
 import org.jiyoung.kikihi.platform.domain.keyboard.product.ProductImg;
 import org.jiyoung.kikihi.platform.domain.keyboard.product.ProductOption;
-import org.jiyoung.kikihi.platform.domain.keyboard.tag.ProductTag;
 import org.jiyoung.kikihi.platform.domain.keyboard.tag.Tag;
 
 import java.util.List;

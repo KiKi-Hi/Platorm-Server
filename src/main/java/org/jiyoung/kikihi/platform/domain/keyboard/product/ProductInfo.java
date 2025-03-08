@@ -3,7 +3,6 @@ package org.jiyoung.kikihi.platform.domain.keyboard.product;
 
 import lombok.*;
 import org.jiyoung.kikihi.platform.adapter.in.web.dto.request.product.ProductInfoRequest;
-import org.jiyoung.kikihi.platform.adapter.in.web.dto.request.product.ProductRequest;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

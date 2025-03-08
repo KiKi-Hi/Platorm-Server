@@ -1,7 +1,6 @@
 package org.jiyoung.kikihi.platform.domain.keyboard.tag;
 
 import lombok.*;
-import org.jiyoung.kikihi.platform.adapter.in.web.dto.request.product.TagRequest;
 
 @Getter
 @Builder

@@ -25,7 +25,7 @@ public class UserJpaEntity implements UserDetails {
     @Column(unique = true, nullable = false)
     private String email;
 
-    @Column(nullable = true)
+    @Column
     private String password;
 
     @Column(nullable =false)
@@ -33,7 +33,7 @@ public class UserJpaEntity implements UserDetails {
 
     //setter
     @Setter
-    @Column(nullable = true)
+    @Column
     private String name;
 
     //권한 반환

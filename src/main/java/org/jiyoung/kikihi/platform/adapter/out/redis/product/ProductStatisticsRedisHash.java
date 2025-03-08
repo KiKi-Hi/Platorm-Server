@@ -5,8 +5,6 @@ import org.jiyoung.kikihi.platform.domain.keyboard.product.ProductStatistics;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 
-import java.io.Serializable;
-
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
