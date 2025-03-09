@@ -41,8 +41,10 @@ public class ProductTempService implements TemporaryProductUseCase {
         // 상품 저장 후, 생성된 productId를 기반으로 옵션 저장
         if (request.getOptions() != null) {
             request.getOptions().forEach(option -> {
-                ProductOption domain = (ProductOption) ProductOptionRedisHash.from(ProductOption.of(option)).toDomain();
+                ProductOption domain = ProductOptionRedisHash.from(ProductOption.of(option)).toDomain();
                 domain.changeProductId(tempProduct.getId()); // 상품 ID와 옵션 연결
+
+                // 임시 옵션 저장
                 tempPort.saveTemporalOptions(domain);
             });
         }
@@ -50,8 +52,10 @@ public class ProductTempService implements TemporaryProductUseCase {
         // 상품 저장 후, 생성된 productId를 기반으로 이미지 저장
         if (request.getImgs() != null) {
             request.getImgs().forEach(img -> {
-                ProductImg domain = (ProductImg) ProductImgRedisHash.of(ProductImg.of(img)).toDomain();
+                ProductImg domain = ProductImgRedisHash.of(ProductImg.of(img)).toDomain();
                 domain.changeProductId(tempProduct.getId()); // 상품 ID와 이미지 연결
+
+                // 임시 이미지 저장
                 tempPort.saveTemporalImgs(domain);
             });
         }
@@ -62,6 +66,8 @@ public class ProductTempService implements TemporaryProductUseCase {
                 // Tag 도메인 생성 후 Redis 저장
                 Tag tagDomain = TagRedisHash.from(Tag.of(tag)).toDomain();
                 tagDomain.changeProductId(tempProduct.getId());
+
+                // 임시 태그 저장
                 tempPort.saveTemporalTag(tagDomain);
 
                 // ProductTag 도메인 연결

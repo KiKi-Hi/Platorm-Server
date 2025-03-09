@@ -30,9 +30,6 @@ public class ProductTempPersistenceAdapter implements TempProductPort {
     private final ProductOptionRedisRepository optionRedisRepository;
     private final ProductImgRedisRepository imgRedisRepository;
     private final ProductTagRedisRepository tagRedisRepository;
-    private final ProductImgRedisRepository productImgRedisRepository;
-    private final CustomRedisRepository customRedisRepository;
-
 
     /// 저장 기능
 
@@ -56,7 +53,7 @@ public class ProductTempPersistenceAdapter implements TempProductPort {
     // Redis에 이미지 임시 저장하기
     @Override
     public void saveTemporalImgs(ProductImg imgs) {
-        productImgRedisRepository.save(ProductImgRedisHash.from(imgs));
+        imgRedisRepository.save(ProductImgRedisHash.from(imgs));
 
     }
 
@@ -66,11 +63,11 @@ public class ProductTempPersistenceAdapter implements TempProductPort {
     public List<Product> getTemporaryProductByUserId(Long userId) {
         System.out.println("용케 여기까지 왔군");
 
-    // product Id가져오기-> productId로 option, img, tag 가져오기->repository에서 처리
-        return customRedisRepository.findAllByUserId(userId)
-                .values().stream()
-                .map(ProductRedisHash::toDomain)
-                .collect(Collectors.toList());
+        // product Id가져오기-> productId로 option, img, tag 가져오기->repository에서 처리
+        return redisRepository.findAllByUserId(userId)
+                .stream().map(ProductRedisHash::toDomain)
+                .toList();
+
     }
 
 
@@ -78,19 +75,22 @@ public class ProductTempPersistenceAdapter implements TempProductPort {
     @Override
     public List<ProductOption> getTemporalOptionsByProductId(Long productId) {
         return optionRedisRepository.findByProductId(productId)
-                .stream().map(ProductOptionRedisHash::toDomain).toList();
+                .stream().map(ProductOptionRedisHash::toDomain)
+                .toList();
     }
 
     @Override
     public List<ProductImg> getProductImgsByProductId(Long productId) {
         return imgRedisRepository.findByProductId(productId)
-                .stream().map(ProductImgRedisHash::toDomain).toList();
+                .stream().map(ProductImgRedisHash::toDomain)
+                .toList();
     }
 
     @Override
     public List<Tag> getTagsByProductId(Long productId) {
         return tagRedisRepository.findByProductId(productId)
-                .stream().map(TagRedisHash::toDomain).toList();
+                .stream().map(TagRedisHash::toDomain)
+                .toList();
     }
 
     // Redis에서 특정 사용자의 임시 저장된 상품을 삭제하는 메서드

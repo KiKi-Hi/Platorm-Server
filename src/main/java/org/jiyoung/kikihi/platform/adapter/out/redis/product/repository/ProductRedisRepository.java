@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Repository
 public interface ProductRedisRepository extends CrudRepository<ProductRedisHash, Long>{
@@ -53,5 +52,5 @@ public interface ProductRedisRepository extends CrudRepository<ProductRedisHash,
         redisTemplate.opsForValue().set(getStockKey(productId), stock);
     }
 
-
+    List<ProductRedisHash> findAllByUserId(Long userId);
 }

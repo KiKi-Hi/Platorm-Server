@@ -26,6 +26,8 @@ public interface TempProductPort {
     /// 조회
     // 사용자별 상품 임시저장 조회
     List<Product> getTemporaryProductByUserId(Long userId);
+
+
     // 아이디를 바탕으로 조회
     List<ProductOption> getTemporalOptionsByProductId(Long productId);
     List<ProductImg> getProductImgsByProductId(Long productId);
