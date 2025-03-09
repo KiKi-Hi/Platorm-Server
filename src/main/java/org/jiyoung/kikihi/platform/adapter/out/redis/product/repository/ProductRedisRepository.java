@@ -9,12 +9,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
-public interface ProductRedisRepository extends CrudRepository<ProductRedisHash, Long> {
-
-    // 유저 ID를 바탕으로 임시저장 목록 가져오기
-    List<ProductRedisHash> findAllByUserId(Long userId);
+public interface ProductRedisRepository extends CrudRepository<ProductRedisHash, Long>{
 
     // 재고 -1
     final RedisTemplate<String,Integer> redisTemplate = new RedisTemplate<>();

@@ -77,6 +77,9 @@ dependencies {
 
 	//json
 	implementation 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.15.0'
+	tasks.withType(JavaCompile) {
+		options.compilerArgs << '-parameters'
+	}
 
 
 }

@@ -33,8 +33,9 @@ public class ProductTemporalApi {
     // 사용자별 임시 목록 조회
     @GetMapping("/temporary/{userId}")
     public ApiResponse<List<ProductResponse>> getTemporaryProduct(@PathVariable("userId") Long userId) {
+        System.out.println("userId = " + userId);
         List<Product> products = temporaryService.getTemporaryProductsByUserId(userId);
-        System.out.println(products);
+        System.out.println("사용자 조회 임시 저장 product = " +products);
 
         List<ProductResponse> productResponse = products.stream()
                 .map(ProductResponse::from)

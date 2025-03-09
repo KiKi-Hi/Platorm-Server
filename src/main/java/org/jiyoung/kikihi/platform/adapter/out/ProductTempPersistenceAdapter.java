@@ -5,11 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.jiyoung.kikihi.platform.adapter.out.redis.product.ProductImgRedisHash;
 import org.jiyoung.kikihi.platform.adapter.out.redis.product.ProductOptionRedisHash;
 import org.jiyoung.kikihi.platform.adapter.out.redis.product.TagRedisHash;
-import org.jiyoung.kikihi.platform.adapter.out.redis.product.repository.ProductImgRedisRepository;
-import org.jiyoung.kikihi.platform.adapter.out.redis.product.repository.ProductOptionRedisRepository;
+import org.jiyoung.kikihi.platform.adapter.out.redis.product.repository.*;
 import org.jiyoung.kikihi.platform.adapter.out.redis.product.ProductRedisHash;
-import org.jiyoung.kikihi.platform.adapter.out.redis.product.repository.ProductRedisRepository;
-import org.jiyoung.kikihi.platform.adapter.out.redis.product.repository.ProductTagRedisRepository;
 import org.jiyoung.kikihi.platform.application.out.keyboard.product.TempProductPort;
 import org.jiyoung.kikihi.platform.domain.keyboard.product.Product;
 import org.jiyoung.kikihi.platform.domain.keyboard.product.ProductImg;
@@ -18,6 +15,7 @@ import org.jiyoung.kikihi.platform.domain.keyboard.tag.Tag;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -33,6 +31,7 @@ public class ProductTempPersistenceAdapter implements TempProductPort {
     private final ProductImgRedisRepository imgRedisRepository;
     private final ProductTagRedisRepository tagRedisRepository;
     private final ProductImgRedisRepository productImgRedisRepository;
+    private final CustomRedisRepository customRedisRepository;
 
 
     /// 저장 기능
@@ -56,19 +55,22 @@ public class ProductTempPersistenceAdapter implements TempProductPort {
 
     // Redis에 이미지 임시 저장하기
     @Override
-    public void saveTemporalImg(ProductImg imgs) {
+    public void saveTemporalImgs(ProductImg imgs) {
         productImgRedisRepository.save(ProductImgRedisHash.from(imgs));
 
     }
 
 
-
     // Redis에 특정 사용자의 임시 저장된 상품을 조회
     @Override
     public List<Product> getTemporaryProductByUserId(Long userId) {
+        System.out.println("용케 여기까지 왔군");
 
-        return redisRepository.findAllByUserId(userId)
-                .stream().map(ProductRedisHash::toDomain).toList();
+    // product Id가져오기-> productId로 option, img, tag 가져오기->repository에서 처리
+        return customRedisRepository.findAllByUserId(userId)
+                .values().stream()
+                .map(ProductRedisHash::toDomain)
+                .collect(Collectors.toList());
     }
 
 

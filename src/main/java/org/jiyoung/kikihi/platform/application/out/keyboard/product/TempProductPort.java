@@ -21,7 +21,7 @@ public interface TempProductPort {
     void saveTemporalTag(Tag domain);
 
     //이미지
-    void saveTemporalImg(ProductImg domain);
+    void saveTemporalImgs(ProductImg domain);
 
     /// 조회
     // 사용자별 상품 임시저장 조회
@@ -34,7 +34,6 @@ public interface TempProductPort {
     /// 삭제
     // 임시저장된 상품 삭제하기
     void deleteTemporaryProduct(String userId);
-
 
 
 }

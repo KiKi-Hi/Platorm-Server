@@ -41,7 +41,7 @@ public class ProductTempService implements TemporaryProductUseCase {
         // 상품 저장 후, 생성된 productId를 기반으로 옵션 저장
         if (request.getOptions() != null) {
             request.getOptions().forEach(option -> {
-                ProductOption domain = ProductOptionRedisHash.from(ProductOption.of(option)).toDomain();
+                ProductOption domain = (ProductOption) ProductOptionRedisHash.from(ProductOption.of(option)).toDomain();
                 domain.changeProductId(tempProduct.getId()); // 상품 ID와 옵션 연결
                 tempPort.saveTemporalOptions(domain);
             });
@@ -50,9 +50,9 @@ public class ProductTempService implements TemporaryProductUseCase {
         // 상품 저장 후, 생성된 productId를 기반으로 이미지 저장
         if (request.getImgs() != null) {
             request.getImgs().forEach(img -> {
-                ProductImg domain = ProductImgRedisHash.of(ProductImg.of(img)).toDomain();
+                ProductImg domain = (ProductImg) ProductImgRedisHash.of(ProductImg.of(img)).toDomain();
                 domain.changeProductId(tempProduct.getId()); // 상품 ID와 이미지 연결
-                tempPort.saveTemporalImg(domain);
+                tempPort.saveTemporalImgs(domain);
             });
         }
 
@@ -74,6 +74,7 @@ public class ProductTempService implements TemporaryProductUseCase {
     @Override
     public List<Product> getTemporaryProductsByUserId(Long userId) {
         List<Product> products = tempPort.getTemporaryProductByUserId(userId);
+        System.out.println("ProductTempService.getTemporaryProductsByUserId" + products);
 
         products.forEach(product -> {
             product.changeOptions(tempPort.getTemporalOptionsByProductId(product.getId()));

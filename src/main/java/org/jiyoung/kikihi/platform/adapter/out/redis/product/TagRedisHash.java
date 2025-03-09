@@ -17,6 +17,7 @@ public class TagRedisHash {
 
     @Indexed
     private Long productId;
+
     private String name;
 
     public static TagRedisHash of(Tag Tag, ProductTag productTag) {
@@ -28,6 +29,7 @@ public class TagRedisHash {
 
     public static TagRedisHash from(Tag tags) {
         return TagRedisHash.builder()
+                .productId(tags.getProductId())
                 .name(tags.getName())
                 .build();
     }

@@ -47,13 +47,13 @@ public class ProductImgRedisHash {
                 .build();
     }
 
-    public static ProductImgRedisHash from(ProductImg imgs) {
+    public static ProductImgRedisHash from(ProductImg img) {
         return ProductImgRedisHash.builder()
-                .productId(imgs.getProductId())
-                .thumbnailImg(imgs.getThumbnailImg())
-                .mainImgs(imgs.getMainImgs())
-                .descriptionImgs(imgs.getDescriptionImgs())
-                .descriptionHtml(imgs.getDescriptionHtml())
+                .productId(img.getProductId())
+                .thumbnailImg(img.getThumbnailImg())
+                .mainImgs(img.getMainImgs())
+                .descriptionImgs(img.getDescriptionImgs())
+                .descriptionHtml(img.getDescriptionHtml())
                 .build();
 
     }
